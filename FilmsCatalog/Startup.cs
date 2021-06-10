@@ -30,12 +30,15 @@ namespace FilmsCatalog
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<MoviesDbContext>();
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();            
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<MovieDao>();
+            services.AddScoped<MoviesModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,43 @@
+﻿@using FilmsCatalog.Data
+@using FilmsCatalog.Data.Entities
+@using FilmsCatalog.Models
+@model Movie
+
+@{
+	ViewData["Title"] = "Edit movie";
+	MoviesModel context = new MoviesModel(new FilmsCatalog.Data.MovieDao(new MoviesDbContext()));
+	context.Init();
+
+}
+<h5>Сохранение изменений разрешено только зарегистрированным пользователям.</h5>
+<div>
+<form method="POST" action="@Url.Action("Save", "Movies", @Model)">
+<div class="row">
+	<label>Title:</label><input type="text" name="title" value="@Model.Title" />
+	</div>
+	<div class="row">
+	<label>Release date:</label><input type="date" name="release" value="@Model.Release"/>
+	</div>
+	<div class="row">
+	<label>Режисер:</label>
+	<select name="director">
+	@foreach(SelectListItem item in @context.Directors)
+	{
+		if (@Model.Director != null && @Model.Director.Name == @item.Text)
+		{
+			<option selected>@item.Text</option>
+		}
+		else
+		{
+			<option>@item.Text</option>
+		}
+	}
+	</select>
+ </div>
+	<div class="row">
+	<label>Description:</label><input type="text" name="description" value="@Model.Description"/>
+	<div class="row">
+	<input type="submit" neme="Save" value="Save movie"/>
+	</div>
+</form>
+</div>

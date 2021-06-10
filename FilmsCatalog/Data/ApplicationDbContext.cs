@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FilmsCatalog.Models;
+using FilmsCatalog.Data.Entities;
 
 namespace FilmsCatalog.Data
 {
@@ -13,5 +14,6 @@ namespace FilmsCatalog.Data
             : base(options)
         {
         }
+
     }
 }
